@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>My Valentine 💕</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #9aceff, #fad0c4, #ffd1ff, #a1c4fd);
+      background-size: 400% 400%;
+      animation: gradientMove 10s ease infinite;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px rgba(255, 105, 180, 0.35);
+    }
+
+    .card {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: 0.4s;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      animation: pop 1s ease;
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+
+    @keyframes pop {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    h1 {
+      font-size: 3em;
+      margin: 0 0 8px 0;
+    }
+
+
+    p {
+      font-size: 1.1em;
+      line-height: 1.5;
+      margin-top: 5px;
+
+    }
+
+
+    button {
+      margin-top: 10px;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 40px;
+      background: linear-gradient(45deg, #ff7eb3, #ff758c);
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 118, 150, 0.5);
+    }
+
+
+
+    .hidden {
+      display: none;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    .img {
+      animation: float 3s ease-in-out infinite;
+      margin-bottom: 8px;
+
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <audio id="music" autoplay loop muted>
+  <source src="music/music.mp3" type="audio/mpeg">
+</audio>
+
+  <div class="card">
+    <h1>Hey Love 💕</h1>
+    <img class="img" src="images/bubu.png" alt="Love GIF"
+      style="width: 100%; border-radius: 15px; margin-bottom: 15px;" />
+    <p>
+   
+      Distance means so little,
+      when someone means so much ❤️
+
+    </p>
+
+    <button onclick="window.location.href='feb.html'">let's celebrate this valentine week together💌</button>
+
+  </div>
+
+  <script>
+    window.addEventListener("click", function () {
+  const music = document.getElementById("music");
+  music.muted = false;
+  music.play();
+});
+
+    function showMessage() {
+      document.getElementById("surprise").classList.remove("hidden");
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      const emojis = ["❤️", "💖", "💘", "💕", "💗"];
+      heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }
+
+    setInterval(createHeart, 400);
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Hug Day ❤️</title>
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    font-family: 'Segoe UI', sans-serif;
+
+    background:linear-gradient(135deg,#ffd6e7,#ffeefe);
+    overflow:hidden;
+}
+.bg-hug{
+    position:fixed;
+    inset:0;
+    background:url('images/hug.avif');
+    background-size:cover;
+    background-position: atop;
+    z-index:-2;
+    opacity:.25;
+}
+
+/* Floating Hearts */
+.heart{
+    position:absolute;
+    color:pink;
+    font-size:20px;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-10vh);
+        opacity:0;
+    }
+}
+
+/* Title */
+h1{
+    margin-top: 300px;
+    font-size:45px;
+    color:#ff4d88;
+    text-shadow:0 0 15px pink;
+}
+
+/* Button */
+button{
+    padding:16px 35px;
+    border:none;
+    border-radius:40px;
+    background:#ff4d88;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 6px 20px rgba(255,77,136,.4);
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+/* Popup */
+.popup{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    display:none;
+    justify-content:center;
+    align-items:center;
+}
+
+.card{
+    background:white;
+    padding:40px;
+    border-radius:25px;
+    text-align:center;
+    animation:pop .4s ease;
+}
+
+@keyframes pop{
+    from{transform:scale(.5);opacity:0;}
+    to{transform:scale(1);}
+}
+
+/* Hug Teddy */
+.teddy{
+    font-size:70px;
+    animation:hug .8s infinite alternate;
+}
+
+@keyframes hug{
+    from{transform:translateX(-10px);}
+    to{transform:translateX(10px);}
+}
+
+.msg{
+    font-size:22px;
+    color:#000000;
+    margin-top:10px;
+}
+
+/* Sparkle */
+.sparkle{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:white;
+    border-radius:50%;
+    animation:spark 1s linear infinite;
+}
+
+@keyframes spark{
+    from{opacity:1;}
+    to{opacity:0; transform:scale(3);}
+}
+.card{
+    backdrop-filter:blur(20px);
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.3);
+    padding:45px;
+    border-radius:30px;
+    text-align:center;
+    animation:pop .4s ease;
+    color:white;
+    box-shadow:0 0 40px rgba(255,77,136,.5);
+}
+.teddy{
+    font-size:90px;
+    animation:hug .6s infinite alternate;
+    filter:drop-shadow(0 0 10px pink);
+}
+.hug-img{
+    width:180px;
+    border-radius:20px;
+    margin-bottom:15px;
+    animation:pop .5s ease;
+    box-shadow:0 0 25px rgba(255,105,180,.6);
+}
+
+
+</style>
+</head>
+
+<body>
+
+    <div class="bg-hug"></div>
+
+<h1>Happy Hug Day 🤗</h1>
+
+<button onclick="openHug()">Tap For A Hug 💕</button>
+
+
+<!-- Popup -->
+<div class="popup" id="popup">
+    <div class="card">
+
+        <!-- <div class="teddy">🧸❤️🧸</div> -->
+         <img src="images/hug image.png" class="hug-img">
+
+         <!-- <div class="teddy">🤗</div> -->
+
+        <div class="msg">
+            Sending you the warmest hug!  
+            Come here… you are safe in my arms ❤️
+        </div>
+
+        <br>
+
+        <button onclick="closeHug()">Close</button>
+
+    </div>
+</div>
+
+
+<!-- Romantic Music -->
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8a4019c1f.mp3">
+</audio>
+
+
+
+<script>
+
+/* popup */
+// function openHug(){
+//     document.getElementById("popup").style.display="flex";
+//     sparkle();
+// }
+function openHug(){
+    document.getElementById("popup").style.display="flex";
+    sparkle();
+    heartBurst();
+    document.getElementById("music").play();
+
+}
+
+
+function closeHug(){
+    document.getElementById("popup").style.display="none";
+}
+
+/* hearts */
+setInterval(()=>{
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤";
+
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(10+Math.random()*30)+"px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),6000);
+},300);
+
+
+/* sparkle */
+function sparkle(){
+    for(let i=0;i<25;i++){
+        let s=document.createElement("div");
+        s.className="sparkle";
+
+        s.style.top=Math.random()*100+"%";
+        s.style.left=Math.random()*100+"%";
+
+        document.body.appendChild(s);
+
+        setTimeout(()=>s.remove(),1000);
+    }
+}
+function heartBurst(){
+
+for(let i=0;i<40;i++){
+
+let h=document.createElement("div");
+h.innerHTML="💖";
+h.style.position="fixed";
+h.style.left="50%";
+h.style.top="55%";
+h.style.fontSize="20px";
+h.style.pointerEvents="none";
+
+let x=(Math.random()-0.5)*600;
+let y=(Math.random()-0.5)*600;
+
+h.animate([
+{transform:"translate(0,0)",opacity:1},
+{transform:`translate(${x}px,${y}px)`,opacity:0}
+],{duration:900});
+
+document.body.appendChild(h);
+
+setTimeout(()=>h.remove(),900);
+}
+}
+
+
+
+
+</script>
+
+</body>
+</html>

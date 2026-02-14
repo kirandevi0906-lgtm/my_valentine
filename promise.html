@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Promise Day ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:rgb(0, 0, 0);
+background-image: url(images/pngwing.com\ \(3\).png);
+font-family:Poppins;
+overflow:hidden;
+}
+
+/* FIREWORK BACKGROUND */
+
+canvas{
+position:absolute;
+top:0;
+left:0;
+}
+
+/* MAIN CARD */
+
+.card{
+position:relative;
+z-index:2;
+width:600px;
+padding:25px;
+border-radius:25px;
+text-align:center;
+background:rgba(0, 0, 0, 0.178);
+backdrop-filter:blur(7px);
+box-shadow:0 0 40px rgb(0, 0, 0);
+color:rgb(255, 255, 255);
+}
+
+h1{
+font-family:"Dancing Script";
+font-size:42px;
+color:#000000;
+text-shadow:0 0 20px rgb(250, 250, 250);
+}
+
+/* PROMISE TEXT */
+
+#promiseText{
+min-height:80px;
+margin-top:10px;
+font-size:18px;
+}
+
+/* BUTTON */
+
+button{
+margin-top:20px;
+padding:12px 28px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff0080,#ff4da6);
+color:rgb(255, 255, 255);
+font-size:18px;
+cursor:pointer;
+box-shadow:0 0 20px rgb(0, 0, 0);
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+/* HEART BLAST */
+
+.heart{
+position:fixed;
+font-size:22px;
+animation:blast 1s linear forwards;
+}
+
+@keyframes blast{
+to{
+transform:translateY(-120px);
+opacity:0;
+}
+}
+
+/* POPUP */
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:none;
+justify-content:center;
+align-items:center;
+background:rgba(0,0,0,0.85);
+z-index:5;
+}
+
+.box{
+background:black;
+padding:40px;
+border-radius:25px;
+text-align:center;
+color:white;
+box-shadow:0 0 50px hotpink;
+animation:pop .4s;
+}
+
+@keyframes pop{
+from{transform:scale(0);}
+to{transform:scale(1);}
+}
+
+/* HUG */
+
+.hug{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0);
+font-size:90px;
+animation:hug 1s forwards;
+}
+
+@keyframes hug{
+to{transform:translate(-50%,-50%) scale(1.4);}
+}
+.fingerprint-box{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  cursor:pointer;
+}
+
+.fingerprint{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  border:3px solid #ff4da6;
+  box-shadow:0 0 20px #000000,
+             inset 0 0 20px #ffffff;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.1);}
+  100%{transform:scale(1);}
+}
+
+.touch-text{
+  color:rgb(0, 0, 0);
+  margin-top:10px;
+  margin-left: 20px;
+  font-size:25px;
+  font-family: "Dancing Script", cursive;
+  background-color: white;
+  border-radius: 30px;
+  border:1px solid rgb(54, 52, 52);
+    padding:5px 10px;   /* 👈 YE GAP create karega */
+    display:inline-block;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+
+  
+}
+
+.hidden{
+  display:none;
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+<source src="https://assets.mixkit.co/music/preview/mixkit-love-romantic-relationships-124.mp3">
+</audio>
+
+<canvas id="fireworks"></canvas>
+
+<div class="card">
+
+<h1>Happy Promise Day ❤️</h1>
+
+<p id="promiseText"></p>
+
+<button onclick="acceptPromise()">I Promise 💍</button>
+
+</div>
+<div class="fingerprint-box" onclick="unlockPromise()">
+
+    <div class="fingerprint"></div>
+
+    <p class="touch-text">Touch to Seal the Promise ❤️</p>
+
+</div>
+
+
+<h1 id="promiseText" class="hidden">
+I Promise to Love You Forever 💍
+</h1>
+
+<div class="popup" id="popup">
+<div class="box">
+
+<h2>Promise Locked ❤️</h2>
+<p>Now you are officially stuck with me forever 😌</p>
+
+<button onclick="closePopup()"> I Love You🤗</button>
+
+</div>
+</div>
+
+<script>
+
+
+function unlockPromise(){
+
+  document.querySelector(".fingerprint").style.animation="none";
+
+  document.getElementById("promiseText").classList.remove("hidden");
+
+  document.getElementById("promiseText").style.animation="fadeIn 2s";
+
+}
+
+
+
+/* MUSIC ON FIRST CLICK */
+
+const music=document.getElementById("music");
+
+document.addEventListener("click",()=>{
+music.volume=.4;
+music.play();
+},{once:true});
+
+
+/* TYPING PROMISE */
+
+const promises=[
+"I promise to annoy you forever 😘",
+"I promise to stand with you always ❤️",
+"I promise to protect your smile 🥺",
+"I promise to love you more every day 💕"
+];
+
+let i=0,j=0;
+
+function type(){
+
+if(i<promises.length){
+
+if(j<promises[i].length){
+document.getElementById("promiseText").innerHTML+=promises[i].charAt(j);
+j++;
+setTimeout(type,40);
+}
+else{
+document.getElementById("promiseText").innerHTML+="<br>";
+i++; j=0;
+setTimeout(type,600);
+}
+
+}
+}
+
+type();
+
+
+/* HEART EXPLOSION */
+
+document.body.addEventListener("click",(e)=>{
+
+for(let i=0;i<8;i++){
+
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+
+h.style.left=e.clientX+"px";
+h.style.top=e.clientY+"px";
+
+document.body.appendChild(h);
+
+setTimeout(()=>h.remove(),1000);
+}
+
+});
+
+
+/* ACCEPT PROMISE */
+
+function acceptPromise(){
+
+document.getElementById("popup").style.display="flex";
+
+let hug=document.createElement("div");
+hug.className="hug";
+hug.innerHTML="🤗❤️";
+
+document.body.appendChild(hug);
+
+setTimeout(()=>hug.remove(),1200);
+
+}
+
+
+/* CLOSE */
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
+
+/* FIREWORKS */
+
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+function explode(x,y){
+
+for(let i=0;i<80;i++){
+
+particles.push({
+x:x,
+y:y,
+dx:(Math.random()-0.5)*6,
+dy:(Math.random()-0.5)*6
+});
+
+}
+}
+
+document.addEventListener("click",(e)=>{
+explode(e.clientX,e.clientY);
+});
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+particles.forEach(p=>{
+ctx.fillStyle="hotpink";
+ctx.fillRect(p.x,p.y,3,3);
+
+p.x+=p.dx;
+p.y+=p.dy;
+});
+
+requestAnimationFrame(animate);
+}
+
+animate();
+
+</script>
+
+</body>
+</html>

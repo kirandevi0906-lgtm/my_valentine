@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teddy Day ❤️</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Dancing+Script:wght@700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 103, 230, 0.774);
+            background-image: url(images/pngwing.com\ \(1\).png);
+            font-family: Poppins;
+            overflow: hidden;
+        }
+
+        /* WALKING TEDDY */
+
+        #teddy {
+            font-size: 110px;
+            position: relative;
+            left: -400px;
+            animation: walk 2.5s forwards;
+        }
+
+        @keyframes walk {
+            to {
+                left: 0;
+            }
+        }
+
+        /* CARD */
+
+        .card {
+            width: 380px;
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            background: white;
+            box-shadow: 0 0 40px rgb(45, 0, 82);
+        }
+
+        h1 {
+            font-family: "Dancing Script";
+            color: #ff4d88;
+        }
+
+        /* BUTTON */
+
+        button {
+            margin-top: 15px;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 25px;
+            background: #ff4d88;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* GAME POPUP */
+
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(238, 133, 150, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .game-box {
+            background: rgb(255, 187, 187, 0.85);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        /* GRID */
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 85px);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .cell {
+            height: 85px;
+            font-size: 42px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffe6f0;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        /* RESULT */
+
+        .resultPopup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .resultBox {
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            text-align: center;
+            animation: pop .4s;
+        }
+
+        @keyframes pop {
+            from {
+                transform: scale(0);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        /* HUG */
+
+        .hug {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 90px;
+            animation: hugAnim 1.2s forwards;
+        }
+
+        @keyframes hugAnim {
+            to {
+                transform: translate(-50%, -50%) scale(1.3);
+            }
+        }
+
+        /* KISS */
+
+        .kiss {
+            position: fixed;
+            font-size: 25px;
+            animation: fall 3s linear forwards;
+        }
+
+        @keyframes fall {
+            from {
+                transform: translateY(-10vh);
+            }
+
+            to {
+                transform: translateY(110vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio id="music" loop preload="auto">
+        <source src="https://cdn.pixabay.com/audio/2023/03/06/audio_124bfa7c9a.mp3">
+    </audio>
+
+
+    <div class="card">
+
+        <div id="teddy">🧸</div>
+
+        <h1>Happy Teddy Day My Love ❤️</h1>
+
+        <button onclick="startGame()">Play Teddy Match 🧸</button>
+        <br>
+        <button onclick="loveMeter()">Check Love Meter ❤️</button>
+
+    </div>
+
+
+    <!-- GAME -->
+    <div class="popup" id="popup">
+        <div class="game-box">
+            <h2>Match 3 Same Teddy To Win!</h2>
+            <div class="grid" id="grid"></div>
+            <button onclick="closeGame()">Close</button>
+        </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="resultPopup" id="resultPopup">
+        <div class="resultBox" id="resultBox"></div>
+    </div>
+
+
+    <script>
+
+        /* GUARANTEED MUSIC PLAY */
+
+        const music = document.getElementById("music");
+
+        function startMusicOnce() {
+
+            music.volume = 0.35;
+
+            music.play().catch(() => { });
+
+            document.removeEventListener("click", startMusicOnce);
+            document.removeEventListener("touchstart", startMusicOnce);
+        }
+
+        /* first interaction */
+        document.addEventListener("click", startMusicOnce);
+        document.addEventListener("touchstart", startMusicOnce);
+
+        /* FORCE MUSIC PLAY */
+
+        function playMusic() {
+            let music = document.getElementById("music");
+
+            music.volume = 0.35; // soft romantic sound
+
+            music.play().catch(() => {
+
+                // agar autoplay block ho jaye
+                document.body.addEventListener("click", () => {
+                    music.play();
+                }, { once: true });
+
+            });
+        }
+
+        /* TALKING TEDDY + HUG ON LOAD */
+
+        window.onload = () => {
+            setTimeout(() => {
+
+                music.play(); // cinematic entry 😍
+
+                speak("Happy Teddy Day my love");
+                hug();
+                kissBlast();
+
+            }, 2200);
+
+
+
+        }
+
+        /* VOICE */
+        function speak(text) {
+
+            let music = document.getElementById("music");
+            music.volume = 0.15; // voice ke time music slow
+
+            let speech = new SpeechSynthesisUtterance(text);
+            speech.pitch = 1.2;
+            speech.rate = 0.9;
+
+            speech.onend = () => {
+                music.volume = 0.35;
+            };
+
+            speechSynthesis.speak(speech);
+        }
+
+        /* HUG */
+
+        function hug() {
+            let h = document.createElement("div");
+            h.className = "hug";
+            h.innerHTML = "🤗❤️";
+            document.body.appendChild(h);
+
+            setTimeout(() => h.remove(), 1400);
+        }
+
+        /* KISS BLAST */
+
+        function kissBlast() {
+
+            for (let i = 0; i < 25; i++) {
+
+                let k = document.createElement("div");
+                k.className = "kiss";
+                k.innerHTML = "😘";
+
+                k.style.left = Math.random() * 100 + "vw";
+
+                document.body.appendChild(k);
+
+                setTimeout(() => k.remove(), 3000);
+            }
+
+        }
+
+        /* LOVE METER */
+
+        function loveMeter() {
+
+            document.getElementById("music").play();
+
+            let percent = 95 + Math.floor(Math.random() * 5);
+
+            document.getElementById("resultPopup").style.display = "flex";
+            document.getElementById("resultBox").innerHTML = `
+<h2>Love Meter ❤️</h2>
+<div style="font-size:70px;">${percent}%</div>
+<p>Warning: Extremely Dangerous Level of Love 😍</p>
+<button onclick="closeResult()">Aww ❤️</button>
+`;
+
+            kissBlast();
+        }
+
+        /* MATCH GAME */
+
+        let selected = [];
+        let values = [];
+
+        function startGame() {
+
+            document.getElementById("popup").style.display = "flex";
+            document.getElementById("music").play();
+
+            createGrid();
+        }
+
+        function createGrid() {
+
+            let teddy = ["🧸", "🐼", "🐻", "🐨"];
+            let grid = document.getElementById("grid");
+
+            grid.innerHTML = "";
+            selected = [];
+            values = [];
+
+            let winTeddy = teddy[Math.floor(Math.random() * teddy.length)];
+
+            values = [winTeddy, winTeddy, winTeddy];
+
+            while (values.length < 9) {
+                values.push(teddy[Math.floor(Math.random() * teddy.length)]);
+            }
+
+            values.sort(() => Math.random() - 0.5);
+
+            values.forEach(val => {
+
+                let cell = document.createElement("div");
+                cell.className = "cell";
+                cell.innerHTML = "❓";
+
+                cell.onclick = () => select(cell, val);
+
+                grid.appendChild(cell);
+
+            });
+
+        }
+
+        function select(cell, val) {
+
+            if (selected.length === 3) return;
+
+            cell.innerHTML = val;
+            selected.push(val);
+
+            if (selected.length === 3) {
+                setTimeout(checkMatch, 600);
+            }
+
+        }
+
+        function checkMatch() {
+
+            document.getElementById("resultPopup").style.display = "flex";
+            kissBlast();
+
+            if (selected[0] === selected[1] && selected[1] === selected[2]) {
+
+                document.getElementById("resultBox").innerHTML = `
+<div style="font-size:90px;">🧸💖</div>
+<h2>U WON MY LOVE 😍</h2>
+<p>This Pink Teddy For U Jaan ❤️</p>
+<button onclick="closeResult()">Love You ❤️</button>
+`;
+
+                speak("Yayyy you win my love, you are like my teddy, I love you");
+
+            } else {
+
+                document.getElementById("resultBox").innerHTML = `
+<div style="font-size:90px;">🧸🤎</div>
+<h2>This Doesn't Matter You Won Or Lose</h2>
+<p>You Won My Heart ❤️</p>
+<button onclick="closeResult()">So Cute ❤️</button>
+`;
+
+            }
+
+        }
+
+        function closeGame() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function closeResult() {
+            document.getElementById("resultPopup").style.display = "none";
+        }
+
+    </script>
+
+</body>
+
+</html>

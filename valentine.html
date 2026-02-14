@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Forever Valentine ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Dancing+Script:wght@600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- FLOATING HEARTS -->
+<script>
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*95+"vw";
+heart.style.fontSize=(Math.random()*20+10)+"px";
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),6000);
+},300);
+</script>
+
+
+<!-- LOCK PAGE -->
+<div class="page" id="lockPage">
+
+<div class="lock"> <img class="lock-img" src="images/lock.png" alt="" srcset=""> </div>
+
+<h2>Since 4 November 2024,<br>My Heart Belongs To You</h2>
+
+<input type="password" id="pass" placeholder="Enter Our Date">
+
+<button onclick="unlock()">Unlock My Heart</button>
+
+<p id="error" style="color:red;"></p>
+
+</div>
+
+
+<!-- JOURNEY PAGE -->
+<div class="page" id="journeyPage">
+
+<h1 style="font-family: 'dancing script', cursive; font-weight: 100; text-shadow: 2px 2px 4px rgba(0,0,0,0.4);" >Our Journey ❤️</h1>
+
+<div class="timeline">
+
+<div class="moment">✨ Instagram Group — Where destiny added you into my life.</div>
+
+<div class="moment">🙂 Three Months Strangers — You liked me before I noticed you.</div>
+
+<div class="moment">🫂 The Day You Helped Me — My heart felt safe.</div>
+
+<div class="moment">💍 4 Nov 2024 — Best decision of my life.</div>
+
+<div class="moment">🔥 Our Fights — But we never quit on us.</div>
+
+<div class="moment">👶 Sometimes my boyfriend… sometimes my baby.</div>
+
+<div class="moment"><b>“I don’t know what love felt like before you… but I know I never want a life without you.”</b></div>
+
+</div>
+
+<button onclick="nextPage('gamePage')">Let's Play A Love Game 🎮</button>
+
+</div>
+
+<!-- GAME PAGE -->
+<div class="page" id="gamePage"
+style="background-image: url(images/vbg.avif); transform:translateX(100%);">
+
+<h1 style="color:white;">Let's Play A Love Game 🎮</h1>
+<p style="color:white;">Win to unlock your surprise ❤️</p>
+
+<div class="board" id="board"></div>
+
+<div class="message" id="message"></div>
+
+<button onclick="resetGame()">Restart</button>
+
+</div>
+
+
+<div id="boomContent" style="display:none;">
+
+<div class="explosion">💖</div>
+
+<img src="photo1.jpg">
+
+<h2>
+I feel very lucky to have you as my forever.<br><br>
+
+I don’t just want years with you…<br>
+I want a lifetime.<br><br>
+
+I want to marry you ❤️<br>
+I want to grow old with you.
+</h2>
+
+<button onclick="nextPage('proposalPage')">next💍</button>
+
+</div>
+
+</div>
+
+
+<!-- PROPOSAL -->
+<div class="page" id="proposalPage">
+
+<div class="bigText">Will You Be My Forever Valentine? 💍</div>
+
+<img src="images/us.png">
+
+<button class="yes" onclick="nextPage('photobooth')">YES</button>
+
+<button class="no" onmouseover="runAway(this)">NO</button>
+
+</div>
+ <!-- FOREVER PAGE -->
+<div class="page" id="photobooth">
+
+<h1 class="foreverText">Our Forever ❤️</h1>
+
+<div class="photoRow">
+
+  <div class="picBox">
+    <img src="images/me (1).png" class="sidePic">
+    <p class="caption">Me ❤️</p>
+  </div>
+
+  <div class="picBox">
+    <img src="images/us.png" class="mainPic">
+    <p class="caption mainCaption">us 💕</p>
+  </div>
+
+  <div class="picBox">
+    <img src="images/he.png" class="sidePic">
+    <p class="caption">He 😘</p>
+  </div>
+
+</div>
+
+<button class="lastBtn" onclick="openFinalPage()">
+   One Last Message ❤️
+</button>
+
+</div>
+
+<!-- FINAL CINEMATIC PAGE -->
+<div class="page" id="finalLovePage">
+
+    <!-- Music -->
+    <audio id="loveMusic" src="music/love.mp3" loop></audio>
+
+    <div class="finalContainer">
+
+        <div class="loveMessage">
+            I love you my amuuu ❤️<br><br>
+
+            I wish that we always stay together like this.<br>
+            You are my life partner…<br>
+            The person I trust the most and love too much.<br><br>
+
+            Thank you for being my Valentine forever.<br><br>
+
+            <span class="highlight">
+                I love you hukum saa ❤️
+            </span>
+        </div>
+
+        <!-- MAP -->
+        <div class="mapBox">
+            <iframe 
+                src="https://www.google.com/maps?q=Delhi%20to%20Rajasthan&output=embed">
+            </iframe>
+        </div>
+
+        <p class="distanceLine">
+            No matter the distance… my heart always finds you ❤️
+        </p>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+html{
+overflow:hidden;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Playfair Display',serif;
+font-weight: 100;
+}
+
+ body{
+background-image: url(images/v2.jpg);
+background-size: cover;
+background-position:center;
+background-repeat:no-repeat;
+overflow:hidden;   
+height:100vh;
+}
+
+
+/* Floating Hearts */
+
+.heart{
+position:fixed;
+bottom:-10px;
+font-size:20px;
+color:#ff4d6d;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+100%{transform:translateY(-110vh);}
+}
+
+ .page{
+height:100vh;
+width:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+position:fixed;   
+top:0;
+left:0;
+transition:1s;
+padding:20px;
+overflow:hidden;
+}
+
+.lock-img{
+    margin-top:70px;
+width:350px;
+background-color: white;
+box-shadow: white 0px 0px 1px, white 0px 0px 1px, white 0px 0px 1px, white 0px 0px 1px;
+}
+
+.lock {
+font-size:90px;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
+}
+
+#lockPage{
+justify-content:flex-start;
+padding-top:12vh;
+}
+
+.lock-img{
+margin-top:20px;   
+width:260px;       
+}
+h2{
+margin-top:10px;
+}
+input{
+margin-top:12px;
+}
+.page{
+overflow:hidden;
+min-height:100vh;
+}
+
+
+input{
+padding:12px;
+border:none;
+border-radius:25px;
+margin-top:20px;
+outline:none;
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:25px;
+background:#ff4d6d;
+color:white;
+cursor:pointer;
+margin-top:15px;
+transition:.3s; 
+
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+#journeyPage{
+  background:#fff0f5;
+  transform:translateX(100%);
+  overflow-y:auto;
+  overflow-x:hidden;
+  position:relative;
+
+  justify-content:flex-start;    
+  padding-top:1vh;           
+}
+#journeyPage::before{
+  content:"";
+  position:absolute;
+  width:400px;
+  height:400px;
+  background:#ff4d6d;
+  filter:blur(180px);
+  opacity:.25;
+  top:-100px;
+  left:-100px;
+  z-index:0;
+}
+
+.timeline{
+  position:relative;
+  z-index:2;
+}
+
+.moment{
+  background:white;
+  margin:15px 0;
+  padding:15px;
+  border-radius:20px;
+  box-shadow:0 5px 15px rgba(194, 17, 17, 0.466);
+
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.6s;
+}
+
+.moment.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* SURPRISE */
+
+#surprisePage{
+background:linear-gradient(135deg,#ffd1dc,#fff0f5);
+transform:translateX(100%);
+}
+
+.explosion{
+font-size:80px;
+animation:boom .8s forwards;
+}
+
+@keyframes boom{
+0%{transform:scale(0);}
+100%{transform:scale(1.5);}
+}
+
+img{
+width:220px;
+border-radius:20px;
+margin:20px 0;
+box-shadow:0 10px 20px rgba(0,0,0,.2);
+}
+
+/* PROPOSAL */
+
+#proposalPage{
+background:#fff0f5;
+transform:translateX(100%);
+}
+
+.bigText{
+font-family:'Dancing Script',cursive;
+font-size:38px;
+margin-bottom:20px;
+}
+
+.yes{
+background:#ff4d6d;
+}
+
+.no{
+background:gray;
+position:relative;
+}
+img{
+max-width:100%;
+height:auto;
+}
+.board{
+display:grid;
+grid-template-columns:repeat(3,100px);
+gap:10px;
+margin:20px auto;
+}
+
+.cell{
+width:100px;
+height:100px;
+border-color: purple;
+background:rgba(250, 3, 3, 0.25);
+font-size:2.5em;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+border-radius:12px;
+}
+
+.message{
+color:white;
+font-size:20px;
+margin-top:10px;
+}
+
+.foreverText{
+  font-family:'Dancing Script',cursive;
+  font-size:48px;
+  color:#ff4d6d;
+  margin-bottom:40px;
+}
+
+.photoRow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:20px;
+}
+
+/* Side Images */
+.sidePic{
+  width:160px;
+  height:220px;
+  object-fit:cover;
+  border-radius:20px;
+  transform:scale(.9);
+  opacity:.85;
+  transition:.4s;
+}
+
+/* Center Image */
+.mainPic{
+  width:260px;
+  height:340px;
+  object-fit:cover;
+  border-radius:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+  transition:.4s;
+}
+
+/* Hover Magic 🔥 */
+.photoRow img:hover{
+  transform:scale(1.05);
+}
+.picBox{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* Normal caption */
+.caption{
+  margin-top:8px;
+  font-family:'Dancing Script',cursive;
+  font-size:20px;
+  color:#ff4d6d;
+}
+
+.mainCaption{
+  font-size:26px;
+  font-weight:bold;
+  text-shadow:0 4px 10px rgba(255,77,109,.4);
+}
+.picBox:hover .caption{
+  transform:scale(1.15);
+  transition:.3s;
+}
+#foreverPage{
+  background:linear-gradient(-45deg,#ff9a9e,#fecfef,#fad0c4,#ffdde1);
+  background-size:400% 400%;
+  animation:bgMove 8s ease infinite;
+}
+
+@keyframes bgMove{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+.lastBtn{
+  margin-top:40px;
+  padding:14px 32px;
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  background:linear-gradient(135deg,#ff4d6d,#ff758f);
+  color:white;
+  cursor:pointer;
+  transition:.35s;
+  box-shadow:0 8px 20px rgba(255,77,109,.4);
+}
+
+/* Hover Magic */
+.lastBtn:hover{
+  transform:scale(1.08);
+  box-shadow:0 12px 30px rgba(255,77,109,.6);
+}
+#photobooth{
+  transform:translateX(100%);
+  background:linear-gradient(-45deg,#ff9a9e,#fecfef,#fad0c4,#ffdde1);
+  background-size:400% 400%;
+  animation:bgMove 8s ease infinite;
+}
+
+
+#finalLovePage{
+  background:linear-gradient(135deg,#ffd1dc,#ffe5ec,#ffc2d1);
+  transform:translateX(100%);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.finalContainer{
+  text-align:center;
+  max-width:900px;
+  padding:20px;
+}
+
+/* MESSAGE */
+.loveMessage{
+  font-family:'Dancing Script',cursive;
+  font-size:34px;
+  color:#ff4d6d;
+
+  opacity:0;
+  transform:translateY(40px);
+  animation:fadeLove 3s ease forwards;
+}
+
+.highlight{
+  font-size:42px;
+  color:#e63946;
+  text-shadow:0 5px 20px rgba(255,77,109,.5);
+}
+
+/* MAP */
+.mapBox{
+  margin-top:40px;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.mapBox iframe{
+  width:70%;
+  height:150px;
+  border:0;
+}
+
+/* DISTANCE LINE */
+.distanceLine{
+  margin-top:15px;
+  font-size:20px;
+  color:#d6336c;
+  font-weight:500;
+}
+
+/* ANIMATION */
+@keyframes fadeLove{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+

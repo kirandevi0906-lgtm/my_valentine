@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Kiss Day 💋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    /* BODY & BACKGROUND */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      background-image: url(images/kiss.webp);
+      background-size: fill;
+      background-position: center;
+    }
+
+    .card {
+      border-radius: 25px;
+      padding: 25px;
+      width: 90%;
+      height: 600px;
+      max-width: 550px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.774);
+      animation: pop 1s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* HEADINGS & TEXT */
+    h1 {
+      font-size: 2.3em;
+      color: #000000;
+      margin: 0.3em 0;
+    }
+
+    h2 {
+      background-color: white;
+      border-radius: 10px;
+      margin-top: 430px;
+      font-size: 1.05em;
+      margin-bottom: 15px;
+      
+      color: #000;
+    }
+
+    /* KISS IMAGE / EMOJI */
+    img, .emoji-img {
+      width: 70%;
+      border-radius: 20px;
+      margin: 15px 0;
+      animation: heartbeat 1.2s infinite;
+    }
+
+    @keyframes heartbeat{
+      0%{transform:scale(1);}
+      25%{transform:scale(1.06);}
+      40%{transform:scale(1);}
+      60%{transform:scale(1.06);}
+      100%{transform:scale(1);}
+    }
+
+    /* BUTTON */
+    button {
+      margin-top: 10px;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 25px;
+      background: #ff4d6d;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    button:hover {
+      background: #e6003d;
+      transform: scale(1.05);
+    }
+
+    /* CELEBRATION TEXT */
+    #celebration {
+      display: none;
+      margin-top: 15px;
+      font-size: 1.2em;
+      color: #b3002d;
+    }
+
+    /* FLOATING HEARTS / LIPS */
+    .heart {
+      position: absolute;
+      top: -10px;
+      font-size: 22px;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    img{
+      opacity: 0.200;
+      color: rgba(rgba(192, 0, 0, 0.527)527), rgba(0, 128, 0, 0), rgba(0, 0, 255, 0), alpha;
+    }
+  
+
+.kiss-img {
+  width: 70%;
+  margin: 15px 0;
+  border-radius: 20px;
+  animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.06); }
+  40% { transform: scale(1); }
+  60% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+/* POPUP IMAGE / KISS BLOWS */
+.kiss-blow {
+  font-size: 60px;
+  margin: 15px 0;
+  animation: blow 1.5s infinite;
+  position: relative;
+}
+
+/* Hearts flying from kiss */
+@keyframes blow {
+  0%   { transform: translateY(0) scale(1); }
+  50%  { transform: translateY(-10px) scale(1.1); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+
+.kiss-heart {
+  position: absolute;
+  font-size: 20px;
+  pointer-events: none;
+}
+
+
+  </style>
+</head>
+
+<body>
+
+  <!-- BACKGROUND -->
+  <div class="bg"></div>
+
+  <div class="card">
+    <h1>Happy Kiss Day 💋</h1>
+
+    <!-- KISS IMAGE -->
+
+    <h2>
+      Sending you a sweet kiss 💋<br>
+      to make your day more lovely 💖
+    </h2>
+
+<button onclick="receiveKiss()">Receive Kiss 💋</button>
+
+    <div id="celebration"></div>
+  </div>
+
+
+  <script>
+function receiveKiss() {
+  // Show alert
+  alert("Muuuaaah 💋 This kiss is sealed with love ❤️");
+
+  // Open the popup
+  const popup = document.getElementById("kissPopup");
+  popup.style.display = "flex";
+
+  // Start hearts explosion
+  blowHearts();
+}
+
+// Close popup
+function closeKissPopup() {
+  const popup = document.getElementById("kissPopup");
+  popup.style.display = "none";
+}
+
+// Hearts flying from kiss blow
+function blowHearts() {
+  const kissEmoji = document.getElementById("kissBlow");
+  const rect = kissEmoji.getBoundingClientRect();
+
+  for(let i=0; i<20; i++){
+    let heart = document.createElement("div");
+    heart.className = "kiss-heart";
+    heart.innerHTML = "💖";
+
+    // Start at the emoji center
+    heart.style.left = rect.left + rect.width/2 + "px";
+    heart.style.top = rect.top + rect.height/2 + "px";
+
+    document.body.appendChild(heart);
+
+    let x = (Math.random() - 0.5) * 200;
+    let y = -Math.random() * 200;
+
+    heart.animate([
+      { transform: `translate(0,0)`, opacity: 1 },
+      { transform: `translate(${x}px, ${y}px)`, opacity: 0 }
+    ], { duration: 1200, easing: 'ease-out' });
+
+    setTimeout(() => heart.remove(), 1200);
+  }
+}
+
+    function openKissPopup(){
+  const popup = document.getElementById("kissPopup");
+  popup.style.display = "flex";
+  kissExplosion(); // Hearts & lips explode
+}
+
+function closeKissPopup(){
+  const popup = document.getElementById("kissPopup");
+  popup.style.display = "none";
+}
+
+// Explosion hearts/lips
+function kissExplosion(){
+  for(let i=0; i<40; i++){
+    let kiss = document.createElement("div");
+    kiss.innerHTML = "💋";
+    kiss.style.position = "fixed";
+    kiss.style.left = "50%";
+    kiss.style.top = "50%";
+    kiss.style.fontSize = "22px";
+    kiss.style.pointerEvents = "none";
+
+    let x = (Math.random()-0.5)*700;
+    let y = (Math.random()-0.5)*700;
+
+    kiss.animate([
+      { transform:"translate(0,0)", opacity:1 },
+      { transform:`translate(${x}px,${y}px)`, opacity:0 }
+    ], { duration:900 });
+
+    document.body.appendChild(kiss);
+    setTimeout(()=>kiss.remove(),900);
+  }
+}
+
+    // TYPEWRITER TEXT
+    const text="Muuuaaah 💋 This kiss is sealed with love ❤️";
+
+    function typeWriter(i=0){
+      if(i<text.length){
+        document.getElementById("celebration").innerHTML += text.charAt(i);
+        setTimeout(()=>typeWriter(i+1),40);
+      }
+    }
+
+    // KISS EXPLOSION
+    function kissExplosion(){
+      for(let i=0;i<40;i++){
+        let kiss=document.createElement("div");
+        kiss.innerHTML="💋";
+        kiss.style.position="fixed";
+        kiss.style.left="50%";
+        kiss.style.top="55%";
+        kiss.style.fontSize="22px";
+        kiss.style.pointerEvents="none";
+
+        let x=(Math.random()-0.5)*700;
+        let y=(Math.random()-0.5)*700;
+
+        kiss.animate([
+          {transform:"translate(0,0)",opacity:1},
+          {transform:`translate(${x}px,${y}px)`,opacity:0}
+        ],{duration:900});
+
+        document.body.appendChild(kiss);
+        setTimeout(()=>kiss.remove(),900);
+      }
+    }
+
+    // ACCEPT KISS BUTTON
+    function acceptKiss(){
+      document.getElementById("celebration").style.display="block";
+      typeWriter();
+      kissExplosion();
+    }
+
+    // FLOATING LIPS
+    setInterval(()=>{
+      let lip=document.createElement("div");
+      lip.innerHTML="💋";
+      lip.style.position="absolute";
+      lip.style.left=Math.random()*100+"vw";
+      lip.style.top="-20px";
+      lip.style.fontSize="24px";
+      lip.style.animation="fall 4s linear forwards";
+      document.body.appendChild(lip);
+      setTimeout(()=>lip.remove(),4000);
+    },500);
+
+    function openKissPopup() {
+  const popup = document.getElementById("kissPopup");
+  popup.style.display = "flex";
+  blowHearts();
+}
+
+function closeKissPopup() {
+  const popup = document.getElementById("kissPopup");
+  popup.style.display = "none";
+}
+
+// Generate hearts from kiss blow
+function blowHearts() {
+  for(let i=0; i<20; i++){
+    let heart = document.createElement("div");
+    heart.className = "kiss-heart";
+    heart.innerHTML = "💖";
+
+    const kissEmoji = document.getElementById("kissBlow");
+    const rect = kissEmoji.getBoundingClientRect();
+
+    // Start at the kiss emoji center
+    heart.style.left = rect.left + rect.width/2 + "px";
+    heart.style.top = rect.top + rect.height/2 + "px";
+
+    document.body.appendChild(heart);
+
+    let x = (Math.random() - 0.5) * 200;
+    let y = -Math.random() * 200;
+
+    heart.animate([
+      { transform: `translate(0,0)`, opacity: 1 },
+      { transform: `translate(${x}px, ${y}px)`, opacity: 0 }
+    ], { duration: 1200, easing: 'ease-out' });
+
+    setTimeout(() => heart.remove(), 1200);
+  }
+}
+
+  </script>
+
+</body>
+</html>

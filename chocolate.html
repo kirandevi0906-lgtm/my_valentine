@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For Someone Special ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Poppins;
+    background:radial-gradient(circle at top,#1a0000,#000000 70%);
+    overflow:hidden;
+    color:white;
+}
+
+/* card */
+.card{
+    width:360px;
+    padding:35px;
+    border-radius:25px;
+    text-align:center;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(15px);
+    box-shadow:0 0 40px rgba(255,0,80,0.25);
+}
+
+h1{
+    font-family:"Dancing Script";
+    font-size:38px;
+}
+
+input{
+    width:80%;
+    padding:10px;
+    border:none;
+    border-radius:20px;
+    text-align:center;
+}
+
+button{
+    margin-top:15px;
+    padding:12px 24px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    font-weight:bold;
+    background:#ff4d6d;
+    color:white;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+/* chocolate break */
+#choco{
+    font-size:65px;
+}
+
+.break{
+    animation:break .7s forwards;
+}
+
+@keyframes break{
+    50%{transform:scale(1.5) rotate(20deg);}
+    100%{transform:scale(0); opacity:0;}
+}
+
+/* letter */
+.letter{
+    display:none;
+    margin-top:15px;
+    padding:15px;
+    border-radius:15px;
+    background:rgba(255,255,255,0.08);
+}
+
+/* GAME */
+
+.game{
+    display:none;
+    margin-top:20px;
+}
+
+.carousel{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+
+.box{
+    width:80px;
+    height:80px;
+    background:#ff4d6d;
+    border-radius:15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:35px;
+    cursor:pointer;
+    transition:.4s;
+}
+
+.box:hover{
+    transform:scale(1.15);
+}
+
+.result{
+    margin-top:15px;
+    font-size:20px;
+}
+
+
+/* POPUP */
+
+.popup{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.85);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.popup-box{
+    background:#111;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+}
+
+
+
+.close{
+    margin-top:15px;
+    background:#ff4d6d;
+}
+/* SPIN WHEEL */
+
+.wheel-container{
+    margin:20px auto;
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    border:6px solid #ff4d6d;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow:0 0 25px #ff4d6d;
+}
+
+#wheel{
+    font-size:55px;
+    transition:4s cubic-bezier(.17,.67,.83,.67);
+}
+
+
+</style>
+</head>
+<body>
+
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=sweet-love-11009.mp3">
+</audio>
+
+<div class="card">
+
+<h1>You Are My Favorite Sweet ❤️</h1>
+
+<input id="name" placeholder="Enter Name...">
+
+<br>
+
+<button onclick="startLove()">Break Chocolate 🍫</button>
+
+<div id="choco">🍫</div>
+
+<div class="letter" id="letter">
+    <p id="typing"></p>
+
+  <button onclick="openGame()">Play Scratch Chocolate Game 🍫</button>
+
+</div>
+
+<!-- GAME -->
+ <div class="popup" id="popup">
+
+    <div class="popup-box">
+
+        <h2>Spin & Win Chocolate 🍫❤️</h2>
+
+        <div class="wheel-container">
+            <div id="wheel">🎁</div>
+        </div>
+
+        <button onclick="spinWheel()">SPIN 😍</button>
+
+        <div id="spinResult" style="margin-top:15px;"></div>
+
+        <button class="close" onclick="closeGame()">Close</button>
+
+    </div>
+
+</div>
+
+ 
+
+
+<div class="result" id="result"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* typing */
+function startLove(){
+
+document.getElementById("choco").classList.add("break");
+
+setTimeout(()=>{
+document.getElementById("letter").style.display="block";
+typeText();
+},700);
+}
+
+function typeText(){
+
+let name=document.getElementById("name").value || "Cutie";
+
+let text=`Dear ${name},
+You make life sweeter than chocolate...
+So before I give you one,
+
+Let's play a tiny cute game 😍`;
+
+let i=0;
+
+function typing(){
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typing,35);
+}
+}
+
+typing();
+}
+
+/* GAME LOGIC */
+
+let winningIndex;
+
+function startGame(){
+
+document.getElementById("game").style.display="block";
+
+winningIndex=Math.floor(Math.random()*3);
+
+document.getElementById("result").innerHTML="";
+}
+
+/* pick box */
+
+function pick(i){
+
+let result=document.getElementById("result");
+
+if(i===winningIndex){
+
+result.innerHTML="🍫 YAYYY! You won a chocolate!! ❤️";
+
+fireworks();
+
+}else{
+
+result.innerHTML="🥺 Oh nooo... chocolate escaped! But you are still sweeter than it ❤️";
+}
+
+}
+
+/* fireworks */
+
+function fireworks(){
+
+let canvas=document.getElementById("fireworks");
+let ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+for(let i=0;i<120;i++){
+particles.push({
+x:canvas.width/2,
+y:canvas.height/2,
+speed:Math.random()*5+2,
+angle:Math.random()*2*Math.PI,
+life:100
+});
+}
+
+function animate(){
+
+ctx.fillStyle="rgba(0,0,0,0.2)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+particles.forEach((p,index)=>{
+p.x+=Math.cos(p.angle)*p.speed;
+p.y+=Math.sin(p.angle)*p.speed;
+p.life--;
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,2,0,Math.PI*2);
+ctx.fillStyle=`hsl(${Math.random()*360},100%,60%)`;
+ctx.fill();
+
+if(p.life<=0){
+particles.splice(index,1);
+}
+});
+
+if(particles.length>0){
+requestAnimationFrame(animate);
+}
+}
+
+animate();
+}
+function openGame(){
+
+document.getElementById("popup").style.display="flex";
+setupScratch();
+
+}
+
+function closeGame(){
+document.getElementById("popup").style.display="none";
+}
+
+
+
+
+/* popup */
+function openGame(){
+document.getElementById("popup").style.display="flex";
+}
+
+function closeGame(){
+document.getElementById("popup").style.display="none";
+}
+
+/* AUTO WIN SPIN 😈 */
+
+let spun=false;
+
+function spinWheel(){
+
+if(spun) return;
+
+spun=true;
+
+let wheel=document.getElementById("wheel");
+
+/* random looking spin but fixed win */
+let deg=3600 + Math.random()*300;
+
+wheel.style.transform=`rotate(${deg}deg)`;
+
+
+setTimeout(()=>{
+
+document.getElementById("spinResult").innerHTML=
+"🍫 YOU WON A HEART CHOCOLATE ❤️";
+
+hugAnimation();
+fireworks();
+
+},4000);
+
+}
+
+
+/* HUG ANIMATION */
+
+function hugAnimation(){
+
+let hug=document.createElement("div");
+
+hug.innerHTML="🤗❤️🤗";
+
+hug.style.position="fixed";
+hug.style.top="50%";
+hug.style.left="50%";
+hug.style.transform="translate(-50%,-50%) scale(0)";
+hug.style.fontSize="80px";
+hug.style.zIndex="1000";
+hug.style.transition="1s";
+
+document.body.appendChild(hug);
+
+setTimeout(()=>{
+hug.style.transform="translate(-50%,-50%) scale(1.4)";
+},100);
+
+setTimeout(()=>{
+hug.remove();
+},2000);
+
+}
+
+
+/* HEART FIREWORKS */
+
+function fireworks(){
+
+let canvas=document.getElementById("fireworks");
+let ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let hearts=[];
+
+for(let i=0;i<80;i++){
+hearts.push({
+x:canvas.width/2,
+y:canvas.height/2,
+dx:(Math.random()-0.5)*6,
+dy:(Math.random()-0.5)*6,
+size:20
+});
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+hearts.forEach(h=>{
+ctx.font=h.size+"px serif";
+ctx.fillText("💖",h.x,h.y);
+
+h.x+=h.dx;
+h.y+=h.dy;
+});
+
+requestAnimationFrame(animate);
+}
+
+animate();
+
+}
+
+</script>
+
+
+</script>
+
+</body>
+</html>
+

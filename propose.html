@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Propose Day 💍</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url(propose\ bg.jpg);  
+       background-size: 110%;  
+    background-position: center;
+    background-repeat: no-repeat;
+      font-family: 'Poppins', sans-serif;
+      transition: 2s ease;
+
+      overflow: hidden;
+    }
+    @keyframes floatBg {
+
+    0% {
+        background-position: center;
+    }
+
+    50% {
+        background-position: center top;
+    }
+
+    100% {
+        background-position: center;
+    }
+}
+
+#lockScreen{
+  position: fixed;
+  height:100vh;
+  width:100%;
+  background: linear-gradient(135deg,#ff758c,#ff7eb3);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.lockBox{
+  background:white;
+  padding:40px;
+  border-radius:20px;
+  text-align:center;
+}
+
+
+    .card {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px);
+      border-radius: 25px;
+      padding: 25px;
+      width: 90%;
+      max-width: 380px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      animation: pop 1s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      margin-bottom: 15px;
+      font-size: 2.3em;
+      color: #b3002d;
+    }
+
+    p {
+      font-size: 1.05em;
+      margin-bottom: 15px;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 20px;
+      margin: 15px 0;
+    }
+#flash{
+  position: fixed;
+  height:100%;
+  width:100%;
+  background:white;
+  opacity:0;
+  pointer-events:none;
+}
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      position: relative;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 25px;
+      font-size: 0.95em;
+      cursor: pointer;
+    }
+
+    .accept {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    .think {
+      background: #ccc;
+      position: relative;
+    }
+
+    #celebration {
+      display: none;
+      margin-top: 15px;
+      color: #b3002d;
+      font-size: 1.2em;
+    }
+
+    .heart {
+      position: absolute;
+      top: -10px;
+      font-size: 20px;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    #mainCard{
+  opacity: 0;
+  transform: translateY(80px) scale(0.9);
+  transition: 1s ease;
+}
+@keyframes floatUp{
+  from{
+    transform: translateY(0);
+  }
+  to{
+    transform: translateY(-120vh);
+    opacity:0;
+  }
+}
+
+
+  </style>
+</head>
+
+<body>
+  <div id="flash"></div>
+
+  <div id="lockScreen">
+  <div class="lockBox">
+    <h2>🔒 Private</h2>
+    <p>Only for someone very special ❤️</p>
+    <button onclick="unlock()">Open 💖</button>
+  </div>
+</div>
+<div class="card" id="mainCard">
+<!-- 
+
+  <div class="card"> -->
+    <h1>Happy Propose Day 💍</h1>
+
+    <!-- DUDU PROPOSING IMAGE -->
+    <img style="width:100%; height:290px;" src="images/st_small_507x507-pad_600x600_f8f8f8.u2-removebg-preview.png" alt="Dudu proposing 💍">
+
+    <p>
+      Dudu tumse ek sawaal puchna chahta hai 🥺💖<br>
+      Will you be mine forever?
+    </p>
+
+    <div class="buttons">
+   
+      <button class="accept" onclick="acceptProposal()">
+  Yes, I do 💖
+</button>
+
+
+      <button class="think" id="think">
+        Let me think 🤔
+      </button>
+    </div>
+
+    <div id="celebration">
+      💕 I knew it… you were always mine 💍💖
+    </div>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+
+  <script>
+function unlock(){
+document.body.style.backgroundSize = "120%";
+const flash = document.getElementById("flash");
+
+flash.style.opacity = "0.8";
+
+setTimeout(()=>{
+  flash.style.transition="1s";
+  flash.style.opacity="0";
+},100);
+
+  const lock = document.getElementById("lockScreen");
+
+  // fade lock
+  lock.style.transition = "1s";
+  lock.style.opacity = "0";
+
+  setTimeout(()=>{
+    lock.style.display = "none";
+  },1000);
+
+  // FLOAT IN CARD
+  const card = document.getElementById("mainCard");
+
+  setTimeout(()=>{
+    card.style.opacity = "1";
+    card.style.transform = "translateY(0) scale(1)";
+  },300);
+
+  startFloatingHearts();
+}
+
+
+function startFloatingHearts(){
+
+  setInterval(()=>{
+
+    const heart = document.createElement("div");
+
+    heart.innerHTML = "💖";
+    heart.style.position = "absolute";
+    heart.style.bottom = "-20px";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = (20 + Math.random()*20) + "px";
+    heart.style.opacity = "0.7";
+    heart.style.animation = "floatUp 6s linear";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+      heart.remove();
+    },6000);
+
+  },500);
+}
+
+
+    function acceptProposal() {
+
+  document.getElementById("celebration").style.display = "block";
+
+  // FIREWORKS
+  confetti({
+    particleCount: 200,
+    spread: 120,
+  });
+
+ 
+}
+
+
+
+    function createHearts() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+
+      const emojis = ["💖", "💍", "💕", "✨", "😍"];
+      heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (2 + Math.random() * 2) + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 8000);
+    }
+
+    const thinkBtn = document.getElementById("think");
+    thinkBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      thinkBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+  </script>
+
+</body>
+</html>

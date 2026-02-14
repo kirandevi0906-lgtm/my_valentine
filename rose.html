@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Rose Day 🌹</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@600&display=swap"
+    rel="stylesheet">
+
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px);
+      border-radius: 25px;
+      padding: 25px;
+      width: 90%;
+      max-width: 380px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      animation: pop 1s ease;
+    }
+
+    @keyframes pop {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    h1 {
+      font-size: 1.4em;
+      color: #b3002d;
+    }
+
+    p {
+      font-size: 1.05em;
+      margin-bottom: 10px;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 20px;
+      margin: 1px 0;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+
+    }
+
+    button {
+
+      padding: 10px 15px;
+      border: none;
+      border-radius: 25px;
+      font-size: 0.95em;
+      cursor: pointer;
+    }
+
+    .accept {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    .decline {
+      background: #ccc;
+      position: relative;
+    }
+
+    .rose {
+      position: absolute;
+      bottom: -20px;
+      font-size: 22px;
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
+    }
+
+    #rosePopup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.4s;
+    }
+
+    #loveText {
+      font-family: 'Dancing Script', cursive;
+      font-size: 32px;
+      font-weight: 300;
+      color: #ffffff;
+    }
+
+
+ 
+    .rose-box {
+      width: 420px;
+      padding: 40px;
+      border-radius: 25px;
+      animation: floatRose 3s ease-in-out infinite;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+      color: white;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+      transition: 0.5s;
+    }
+
+
+
+    /* active state */
+    #rosePopup.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #rosePopup {
+      background: rgba(0, 0, 0, 0.82);
+    }
+
+    #rosePopup.show .rose-box {
+      transform: scale(1);
+    }
+
+    @keyframes floatRose {
+
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-20px) scale(1);
+      }
+    }
+
+    .petals span {
+      position: absolute;
+      top: -10px;
+      font-size: 20px;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+
+    #loveText {
+      font-family: 'Great Vibes', cursive;
+      font-size: 44px;
+      margin-top: 20px;
+
+      animation: heartbeat 1.4s infinite;
+    }
+
+    @keyframes heartbeat {
+      0% {
+        transform: scale(1);
+      }
+
+      25% {
+        transform: scale(1.05);
+      }
+
+      40% {
+        transform: scale(0.98);
+      }
+
+      60% {
+        transform: scale(1.06);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="mainContent">
+    <div class="calendar-container">
+
+
+      <div class="card">
+        <h1>Happy Rose Day 🌹</h1>
+
+        <!-- DUDU IMAGE -->
+        <img src="images/dudu.png" alt="Dudu giving rose 🌹">
+
+
+        <p>
+          Dudu tumhe ek rose de raha hai 🥰<br>
+          Mana karna allowed nahi 😌
+        </p>
+
+        <div class="buttons">
+        
+          <button class="accept" onclick="showRose()">Accept the Rose 🌹</button>
+
+          <button class="decline" id="decline">
+            Decline 🙃
+          </button>
+        </div>
+      </div>
+      <div class="petals"></div>
+
+
+      <script>
+        function acceptRose() {
+
+        }
+
+        const declineBtn = document.getElementById("decline");
+
+        declineBtn.addEventListener("mouseover", () => {
+          const x = Math.random() * 200 - 100;
+          const y = Math.random() * 200 - 100;
+          declineBtn.style.transform = `translate(${x}px, ${y}px)`;
+        });
+
+        function createRose() {
+          const rose = document.createElement("div");
+          rose.classList.add("rose");
+          rose.innerText = "🌹";
+          rose.style.left = Math.random() * 100 + "vw";
+          rose.style.animationDuration = (4 + Math.random() * 3) + "s";
+          document.body.appendChild(rose);
+
+          setTimeout(() => rose.remove(), 7000);
+        }
+
+        setInterval(createRose, 500);
+
+      
+        function showRose() {
+
+          document.getElementById("rosePopup").classList.add("show");
+          document.getElementById("mainContent").classList.add("blur");
+
+        }
+
+        const petals = document.querySelector(".petals");
+
+        for (let i = 0; i < 15; i++) {
+          let petal = document.createElement("span");
+          petal.innerHTML = "🌹";
+
+          petal.style.left = Math.random() * 100 + "%";
+          petal.style.animationDuration = (3 + Math.random() * 5) + "s";
+
+          petals.appendChild(petal);
+        }
+        const text = "From the moment you entered my life, everything started blooming... Just like this rose 🌹";
+
+        let i = 0;
+        const speed = 70;
+
+        function typing() {
+          if (i < text.length) {
+            loveText.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+          }
+        }
+
+        setTimeout(typing, 900);
+
+
+
+      </script>
+      <div id="rosePopup">
+        <div class="rose-box">
+          🌹
+          <h2 id="loveText"></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
